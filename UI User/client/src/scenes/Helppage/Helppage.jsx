@@ -68,56 +68,9 @@ const Helppage = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "Right",
-          marginTop: "40px", // Contrôle de l'espace en haut
+          marginTop: "30px", // Contrôle de l'espace en haut
         }}
       >
-           <Button
-          onClick={() => {
-          navigate('/Privacypage');
-        }}
-      sx={{
-        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-        width: "100%",
-        height: "70%",
-        maxWidth: "97%", 
-        backgroundColor: palette.background.alt,
-        color: palette.text.primary,
-        display: "flex",
-        flexDirection: "row", 
-        alignItems: "center",
-        justifyContent: "space-between",
-        textTransform: "none",
-        padding: "1rem 2rem", 
-        borderRadius: "8px",
-        transition: "background-color 0.3s ease",
-        "&:hover": {
-          backgroundColor: palette.primary.light,
-        },
-      }}
-    >
-     <TbHistoryToggle  style={{ width: "40px", height: "40px", marginRight: "1rem", color:"#8EACCD" }}/> 
-     
-      <Box sx={{ flexGrow: 1 }}>
-      
-        <Typography
-          variant="h6" // Adjust font size and weight
-          color={palette.text.secondary}
-          sx={{ textAlign: "left", marginBottom: "0.25rem" }} // Align text to the left
-        >
-          { t ("Search History")}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="#37B7C3"  // Subdued color for the secondary text
-          sx={{ textAlign: "left" }}
-        >
-          { t ("Give feedback about your Alumni experience")}
-        </Typography>
-      </Box>
-
-
-      <MdArrowForward style={{ width: "24px", height: "24px", color: palette.text.secondary }} />
-    </Button>
       </Box>
 
       <Box

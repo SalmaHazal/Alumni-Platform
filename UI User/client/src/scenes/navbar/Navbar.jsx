@@ -27,6 +27,7 @@ import Badge from "@mui/material/Badge";
 import axios from "axios";
 import { useUnseenMessages } from "../../context/UnseenMessagesContext";
 import { useTranslation } from 'react-i18next';
+import { PiNoteThin } from "react-icons/pi";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -272,13 +273,22 @@ const Navbar = () => {
                 />
               </ListItem>
 
-
-              <ListItem title="Reviews" button>
-                <RateReview
-                  sx={{ fontSize: "25px" }}
-                  style={{ margin: "0 17px" }}
-                />
+              <ListItem
+                button
+                component={Link}
+                to="/VideoHome"
+                sx={{fontSize: "25px",
+                  borderRadius: "10px",
+                  background:
+                    location.pathname === "/VideoHome"
+                      ? backgroundColor
+                      : "transparent",
+                }}
+                
+              >
+              <PiNoteThin  style={{ margin: "0 17px" }}/>
               </ListItem>
+
             </List>
 
             <AccountMenu />

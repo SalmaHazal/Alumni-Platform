@@ -1,5 +1,6 @@
 import { Button, Box, Typography } from "@mui/material";
-import { RxActivityLog } from "react-icons/rx";
+
+import { MdOutlineMiscellaneousServices } from "react-icons/md";
 import { useTheme } from "@mui/material/styles";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ const Activitylogs = () => {
   return (
     <Button
           onClick={() => {
-          navigate('/Activitylog');
+          navigate('/services');
         }}
       sx={{
         boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
@@ -33,7 +34,7 @@ const Activitylogs = () => {
         },
       }}
     >
-      <RxActivityLog
+      <MdOutlineMiscellaneousServices
         style={{
           width: "40%", // Reduced size for better visual balance
           height: "40%",

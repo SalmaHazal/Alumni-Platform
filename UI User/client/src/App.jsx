@@ -34,6 +34,9 @@ import './App.css';
 import JobList from "./scenes/jobs/JobList";
 import JobPostForm from "./scenes/jobs/JobPostForm";
 import Services from "./scenes/widgets/Services";
+import Revu from "./scenes/Revu/Revu";
+import VideoHome from "./scenes/VideoHome/VideoHome";
+import Videoplayer from "./scenes/Videoplayer/Videoplayer";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -162,6 +165,19 @@ function App() {
     {
       path: "/Services",
       element: <Services />,
+    },
+    {
+      path: "/Revu",
+      element: <Revu />,
+    },
+  {
+      path: "/VideoHome",
+      element: <VideoHome />,
+    },
+    
+    {
+      path: "/Videoplayer",
+      element: <Videoplayer />,
     },
   ]);
 

@@ -56,6 +56,7 @@ app.use(
     credentials: true, // Enable credentials
   })
 );
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use("/documents", express.static(path.join(__dirname, "public/documents")));
 

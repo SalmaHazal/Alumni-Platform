@@ -27,7 +27,7 @@ import Badge from "@mui/material/Badge";
 import axios from "axios";
 import { useUnseenMessages } from "../../context/UnseenMessagesContext";
 import { useTranslation } from "react-i18next";
-import { PiNoteThin } from "react-icons/pi";
+import { HiClipboardDocument } from "react-icons/hi2";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -284,7 +284,7 @@ const Navbar = () => {
                   background: isRevuPath ? backgroundColor : "transparent",
                 }}
               >
-                <PiNoteThin style={{ margin: "0 17px" }} />
+                <HiClipboardDocument style={{ margin: "0 17px" }} />
               </ListItem>
             </List>
 
@@ -447,7 +447,7 @@ const Navbar = () => {
                     background: isRevuPath ? backgroundColor : "transparent",
                   }}
                 >
-                  <PiNoteThin style={{ margin: "0 17px" }} />
+                  <HiClipboardDocument style={{ margin: "0 17px" }} />
                 </ListItem>
 
                 <AccountMenu />

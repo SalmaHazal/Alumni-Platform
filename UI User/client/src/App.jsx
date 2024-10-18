@@ -1,10 +1,14 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
-import { useTranslation } from 'react-i18next'; // Import from react-i18next
+import { useTranslation } from "react-i18next"; // Import from react-i18next
 
 import HomePage from "./scenes/homePage/HomePage";
 import LoginPage from "./scenes/loginPage/LoginPage";
@@ -30,13 +34,14 @@ import Persenaldetailspage from "./scenes/Persenaldetailspage/Persenaldetailspag
 import Planingcallpage from "./scenes/Planingcallpage/Planingcallpage";
 import ContactUs from "./scenes/ContactUs/ContactUs";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
+import "./App.css";
 import JobList from "./scenes/jobs/JobList";
 import JobPostForm from "./scenes/jobs/JobPostForm";
 import Services from "./scenes/widgets/Services";
 import Revu from "./scenes/Revu/Revu";
 import VideoHome from "./scenes/VideoHome/VideoHome";
 import Videoplayer from "./scenes/Videoplayer/Videoplayer";
+import Music from "./scenes/Music/Music";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -50,10 +55,10 @@ function App() {
     const currentLanguage = i18n.language;
 
     // Check if the language is Arabic and set the direction to RTL
-    if (currentLanguage === 'ar') {
-      document.documentElement.setAttribute('dir', 'rtl'); // Set to RTL
+    if (currentLanguage === "ar") {
+      document.documentElement.setAttribute("dir", "rtl"); // Set to RTL
     } else {
-      document.documentElement.setAttribute('dir', 'ltr'); // Set to LTR for other languages
+      document.documentElement.setAttribute("dir", "ltr"); // Set to LTR for other languages
     }
   }, [i18n.language]); // Re-run effect when language changes
 
@@ -124,7 +129,7 @@ function App() {
     },
     {
       path: "/Persenaldetailspage",
-      element: <Persenaldetailspage />
+      element: <Persenaldetailspage />,
     },
     {
       path: "/Activitylog",
@@ -139,24 +144,24 @@ function App() {
       element: <Helppage />,
     },
     {
-      path:"/Helptoimprove",
-      element:<Helptoimprove />
+      path: "/Helptoimprove",
+      element: <Helptoimprove />,
     },
     {
       path: "/Feedbackpage",
       element: <Feedbackpage />,
     },
     {
-      path:"/HelpSomeThingWrong",
-      element: <HelpSomeThingWrong />, 
+      path: "/HelpSomeThingWrong",
+      element: <HelpSomeThingWrong />,
     },
     {
-       path:"/ContactUs",
-       element:<ContactUs />,
+      path: "/ContactUs",
+      element: <ContactUs />,
     },
     {
-      path:"/Planingcallpage",
-      element: <Planingcallpage />
+      path: "/Planingcallpage",
+      element: <Planingcallpage />,
     },
     {
       path: "/Passwordpage",
@@ -169,15 +174,24 @@ function App() {
     {
       path: "/Revu",
       element: <Revu />,
-    },
-  {
-      path: "/VideoHome",
-      element: <VideoHome />,
-    },
-    
-    {
-      path: "/Videoplayer",
-      element: <Videoplayer />,
+      children: [
+        {
+          index: true,
+          element: <VideoHome />,
+        },
+        {
+          path: "VideoHome",
+          element: <VideoHome />,
+        },
+        {
+          path: "Videoplayer",
+          element: <Videoplayer />,
+        },
+        {
+          path: "Music",
+          element: <Music />,
+        },
+      ],
     },
   ]);
 

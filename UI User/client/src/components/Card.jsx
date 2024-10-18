@@ -4,7 +4,7 @@ import { Box, Typography, Avatar } from "@mui/material";
 
 const Card = ({ type }) => {
   return (
-    <Link to="/Videoplayer" style={{ textDecoration: "none" }}>
+    <Link to="/Revu/Videoplayer" style={{ textDecoration: "none" }}>
       <Box
         sx={{
           width: type !== "sm" ? 360 : "100%",

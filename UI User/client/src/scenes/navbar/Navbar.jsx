@@ -26,7 +26,7 @@ import { useTransition, animated } from "@react-spring/web";
 import Badge from "@mui/material/Badge";
 import axios from "axios";
 import { useUnseenMessages } from "../../context/UnseenMessagesContext";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { PiNoteThin } from "react-icons/pi";
 
 const Navbar = () => {
@@ -51,6 +51,7 @@ const Navbar = () => {
     theme.palette.mode === "light" ? "#C7C8CC" : "#3b3b3b";
 
   const isChatPath = /\/chat(\/\d+)?/.test(location.pathname);
+  const isRevuPath = /\/Revu(\/\d+)?/.test(location.pathname);
 
   const fullName = `${user.firstName} ${user.lastName}`;
 
@@ -276,19 +277,15 @@ const Navbar = () => {
               <ListItem
                 button
                 component={Link}
-                to="/VideoHome"
-                sx={{fontSize: "25px",
+                to="/Revu"
+                sx={{
+                  fontSize: "25px",
                   borderRadius: "10px",
-                  background:
-                    location.pathname === "/VideoHome"
-                      ? backgroundColor
-                      : "transparent",
+                  background: isRevuPath ? backgroundColor : "transparent",
                 }}
-                
               >
-              <PiNoteThin  style={{ margin: "0 17px" }}/>
+                <PiNoteThin style={{ margin: "0 17px" }} />
               </ListItem>
-
             </List>
 
             <AccountMenu />
@@ -316,7 +313,7 @@ const Navbar = () => {
             padding="0.1rem 1.2rem"
           >
             <InputBase
-              placeholder={ t ("Search...")}
+              placeholder={t("Search...")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -424,27 +421,33 @@ const Navbar = () => {
                 </ListItem>
 
                 <ListItem
-                button
-                component={Link}
-                to="/post-jobs"
-                sx={{
-                  borderRadius: "10px",
-                  background:
-                    location.pathname === "/post-jobs"
-                      ? backgroundColor
-                      : "transparent",
-                }}
-              >
-                <WorkHistoryIcon
-                  sx={{ fontSize: "25px" }}
-                  style={{ margin: "0 17px" }}
-                />
-              </ListItem>
-                <ListItem title="Jobs" button>
-                  <RateReview
+                  button
+                  component={Link}
+                  to="/post-jobs"
+                  sx={{
+                    borderRadius: "10px",
+                    background:
+                      location.pathname === "/post-jobs"
+                        ? backgroundColor
+                        : "transparent",
+                  }}
+                >
+                  <WorkHistoryIcon
                     sx={{ fontSize: "25px" }}
                     style={{ margin: "0 17px" }}
                   />
+                </ListItem>
+                <ListItem
+                  button
+                  component={Link}
+                  to="/Revu"
+                  sx={{
+                    fontSize: "25px",
+                    borderRadius: "10px",
+                    background: isRevuPath ? backgroundColor : "transparent",
+                  }}
+                >
+                  <PiNoteThin style={{ margin: "0 17px" }} />
                 </ListItem>
 
                 <AccountMenu />

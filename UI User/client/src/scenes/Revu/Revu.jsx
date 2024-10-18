@@ -1,90 +1,89 @@
-import React from 'react';
-import { Box, List, ListItem, ListItemIcon, ListItemText, Drawer, Typography, useTheme } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import LamaTube from "../../../public/assets/logo.png"
-import Navbar from '../navbar/Navbar';
-import WidgetWrapper from '../../components/WidgetWrapper';
-import Divider from ".././widgets/Divider";
-import { Link, Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
+import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import LamaTube from "../../../public/assets/logo.png";
+import Navbar from "../navbar/Navbar";
+import WidgetWrapper from "../../components/WidgetWrapper";
+import Divider from "../widgets/Divider";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
-
-
-const Revu = ({ darkMode, setDarkMode }) => {
+const Revu = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  
+  const location = useLocation();
+  const [selectedIndex, setSelectedIndex] = useState(0); // State for tracking selected index
+
+  const handleListItemClick = (index, path) => {
+    setSelectedIndex(index); // Update selected index
+    navigate(path); // Navigate to the selected path
+  };
+
   return (
     <>
-    <Box className="fixed-navbar">
-      <Navbar />
-    </Box>
-    <WidgetWrapper
-            variant="permanent"
-            sx={{
-                height: "900px",
-                width: 240,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                    width: 240,
-                    backgroundColor: theme.palette.background.default,
-                    color: '#fff',
-                    
-                },
-                marginTop:"70px",
-            }}
-        >
-            <Box mb={3} display="flex" alignItems="center" gap={1} fontWeight="bold">
-             <img src={LamaTube} alt="LamaTube" style={{ height: 25 }} />
-             <Typography variant="h6">AlumniTube</Typography>
-            </Box>
-            <Divider />
-            <List>
-                <ListItem button 
-                onClick={() => {
-                   navigate('/VideoHome');
+      <Box className="fixed-navbar">
+        <Navbar />
+      </Box>
+
+      <div className="grid lg:grid-cols-[250px,1fr] max-h-[90vh] h-[90vh] mt-[10vh]">
+        <WidgetWrapper className="h-full">
+          <Box
+            mb={3}
+            display="flex"
+            alignItems="center"
+            gap={1}
+            fontWeight="bold"
+          >
+            <img src={LamaTube} alt="LamaTube" style={{ height: 25 }} />
+            <Typography variant="h6">AlumniTube</Typography>
+          </Box>
+          <Divider />
+          <List>
+            {[
+              { icon: <HomeIcon />, text: "Home", path: "/Revu/VideoHome" },
+              { icon: <MusicNoteIcon />, text: "Music", path: "/Revu/Music" },
+              { icon: <SportsBasketballIcon />, text: "Sports", path: "/Revu/Sports" },
+              { icon: <SportsEsportsIcon />, text: "Gaming", path: "/Revu/Gaming" },
+              { icon: <LiveTvIcon />, text: "Live", path: "/Revu/Live" },
+            ].map((item, index) => (
+              <ListItem
+                button
+                key={item.text}
+                onClick={() => handleListItemClick(index, item.path)}
+                sx={{
+                  backgroundColor: selectedIndex === index ? theme.palette.action.selected : 'transparent', // Change background color if selected
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover, // Hover effect
+                  },
                 }}
-                >
-                    <ListItemIcon sx={{ color: '#fff' }}>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Home" />
-                    
-                </ListItem>
-                
-                <ListItem button>
-                    <ListItemIcon sx={{ color: '#fff' }}>
-                        <MusicNoteIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Music" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon sx={{ color: '#fff' }}>
-                        <SportsBasketballIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Sports" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon sx={{ color: '#fff' }}>
-                        <SportsEsportsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Gaming" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon sx={{ color: '#fff' }}>
-                        <LiveTvIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Live" />
-                </ListItem>
-            </List>
+              >
+                <ListItemIcon sx={{ color: "black" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            ))}
+          </List>
         </WidgetWrapper>
-        </>
+
+        {/* Content section (Outlet) */}
+        <section className="h-full">
+          <Outlet />
+        </section>
+      </div>
+    </>
   );
 };
 
 export default Revu;
-///

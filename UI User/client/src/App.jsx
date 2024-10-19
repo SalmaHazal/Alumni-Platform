@@ -5,8 +5,8 @@ import {
 } from "react-router-dom";
 import { useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 import { themeSettings } from "./theme";
 import { useTranslation } from "react-i18next"; // Import from react-i18next
 

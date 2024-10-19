@@ -36,7 +36,7 @@ const Revu = () => {
         <Navbar />
       </Box>
 
-      <div className="grid lg:grid-cols-[250px,1fr] max-h-[90vh] h-[90vh] mt-[10vh]">
+      <div className="grid lg:grid-cols-[250px,1fr] max-h-[90vh] h-[90vh] mt-[9vh]">
         <WidgetWrapper className="h-full">
           <Box
             mb={3}

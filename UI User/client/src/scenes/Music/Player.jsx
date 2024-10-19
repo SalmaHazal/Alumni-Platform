@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -44,6 +44,7 @@ const Player = ({
       setIsPlaying(!isPlaying);
     }
   };
+
   useEffect(() => {
     function handleKey(event) {
       if (event.key === ' ') {
@@ -91,7 +92,6 @@ const Player = ({
       }
     }
     if (isPlaying) audioRef.current.play();
-    //playAudio(isPlaying, audioRef);
   };
 
   const trackAnim = {
@@ -99,14 +99,12 @@ const Player = ({
   };
 
   return (
-    <div className="player">
-      <div className="time-control">
-        <p>{getTime(songInfo.currentTime)}</p>
+    <div className="player flex flex-col items-center justify-center p-3 shadow-lg bg-white ">
+      {/* Time Control */}
+      <div className="time-control flex items-center justify-between w-full">
+        <p className="text-blue-700 font-semibold mt-4 text-sm">{getTime(songInfo.currentTime)}</p>
         <div
-          style={{
-            background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
-          }}
-          className="track"
+          className="track w-full mx-4 h-2 rounded-lg relative"
         >
           <input
             min={0}
@@ -114,27 +112,35 @@ const Player = ({
             value={songInfo.currentTime}
             onChange={dragHandler}
             type="range"
+            className="w-full"
           />
-          <div style={trackAnim} className="animate-track"></div>
+          <div
+            style={trackAnim}
+            className="animate-track h-2 absolute top-0 left-0 bg-blue-200 rounded-lg"
+          ></div>
         </div>
-        <p>{songInfo.duration ? getTime(songInfo.duration) : "0:00"}</p>
+        <p className="text-blue-700 mt-4 font-semibold text-sm">
+          {songInfo.duration ? getTime(songInfo.duration) : "0:00"}
+        </p>
       </div>
-      <div className="play-control">
+
+      {/* Play Control */}
+      <div className="play-control flex items-center justify-center mt-4 space-x-6">
         <FontAwesomeIcon
           onClick={() => skipTrackHandler("skip-back")}
-          className="skip-back"
+          className="text-blue-700 cursor-pointer transition-transform transform hover:scale-110"
           size="2x"
           icon={faAngleLeft}
         />
         <FontAwesomeIcon
           onClick={playSongHandler}
-          className="play"
+          className="text-blue-700 cursor-pointer transition-transform transform hover:scale-110"
           size="2x"
           icon={isPlaying ? faPause : faPlay}
         />
         <FontAwesomeIcon
           onClick={() => skipTrackHandler("skip-forward")}
-          className="skip-forward"
+          className="text-blue-700 cursor-pointer transition-transform transform hover:scale-110"
           size="2x"
           icon={faAngleRight}
         />

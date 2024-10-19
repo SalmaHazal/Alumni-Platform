@@ -32,7 +32,7 @@ import Post from "./models/Post.js";
 import { users, posts } from "./data/index.js";
 import { app, server } from "./socket/index.js";
 import bcrypt from 'bcrypt';
-
+import { getSongs, uploading } from "./controllers/songs.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -59,6 +59,8 @@ app.use(
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use("/documents", express.static(path.join(__dirname, "public/documents")));
+app.use("/covers", express.static(path.join(__dirname, "public/covers")));
+app.use("/songs", express.static(path.join(__dirname, "public/songs")));
 
 app.post("/forgot-password", (req, res) => {
   const { email } = req.body;
@@ -146,6 +148,30 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+const songStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (file.fieldname === "cover") {
+      cb(null, "public/covers");
+    } else if (file.fieldname === "songFile") {
+      cb(null, "public/songs");
+    }
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const uploadSong = multer({ storage: songStorage });
+
+
+
+app.post("/api/upload", uploadSong.fields([
+  { name: "cover", maxCount: 1 },
+  { name: "songFile", maxCount: 1 },
+]), uploading);
+
+app.get("/api/getSong", getSongs);
+
 //
 app.post('/changepassword/pass', async (req, res) => {
   const token = req.headers.authorization?.split(' ')[1];
@@ -181,7 +207,7 @@ app.post('/changepassword/pass', async (req, res) => {
 
 
 /*ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register); // we we add new picture to our project
+app.post("/auth/register", upload.single("picture"), register); 
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.put("/users/:id", verifyToken, upload.single("picture"), updateUserProfile);
 

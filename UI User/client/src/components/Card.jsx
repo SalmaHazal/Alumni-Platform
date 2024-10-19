@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Typography, Avatar } from "@mui/material";
 
-const Card = ({ type }) => {
+const Card = ({ type, imgUrl }) => {
   return (
     <Link to="/Videoplayer" style={{ textDecoration: "none" }}>
       <Box
@@ -22,7 +22,7 @@ const Card = ({ type }) => {
             backgroundColor: "#999",
             flex: 1,
           }}
-          src="https://i9.ytimg.com"
+          src={`http://localhost:3001/assets/${imgUrl}`}
           alt="video thumbnail"
         />
         <Box

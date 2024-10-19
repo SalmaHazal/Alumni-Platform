@@ -21,6 +21,7 @@ import notificationRoutes from "./routes/notification.js";
 import jobPostRoutes from "./routes/jobPostRoutes.js";
 import serviceRoutes from "./routes/service.js";
 import feedbackRoutes from "./routes/feedback.js";
+import videoRoutes from "./routes/videos.js"
 import wrongfeedbackRoutes from "./routes/wrongfeedback.js";
 import { register } from "./controllers/auth.js";
 import contactusRoutes from "./routes/contactus.js";
@@ -59,6 +60,7 @@ app.use(
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use("/documents", express.static(path.join(__dirname, "public/documents")));
+app.use("/video", express.static(path.join(__dirname, "public/video")));
 
 app.post("/forgot-password", (req, res) => {
   const { email } = req.body;
@@ -199,6 +201,11 @@ app.use("/api", updateLinks);
 app.use("/notifications", notificationRoutes);
 app.use("/api", jobPostRoutes);
 app.use("/services", serviceRoutes);
+app.use("/videos", upload.fields([
+  { name: 'picture', maxCount: 1 }, // For the picture
+  { name: 'video', maxCount: 1 }    // For the video
+]), videoRoutes);
+
 
 
 

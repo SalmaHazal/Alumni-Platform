@@ -7,13 +7,14 @@ import Revu from "../Revu/Revu";
 import WidgetWrapper from '../../components/WidgetWrapper';
 import LamaTube from "../../../public/assets/logo.png";
 import Divider from "../widgets/Divider";
-import { List, ListItem, ListItemIcon, ListItemText, Drawer, Typography } from '@mui/material';
+import { List, ListItem, ListItemIcon, ListItemText, Drawer, Typography, Button } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import { useNavigate } from "react-router-dom";
+import VideoForm from "../../components/VideoForm";
 
 const Home = () => {
   const theme = useTheme();
@@ -85,40 +86,20 @@ const Home = () => {
                     <ListItemText primary="Live" />
                 </ListItem>
             </List>
+            {/* upload video Button ///////////////////////////////////////////////////////// 
+            <Box>
+              <Button>
+                Upload Video
+              </Button>
+            </Box>*/}
         </WidgetWrapper>
 
       <WidgetWrappe width="1430px" marginTop="80px" marginLeft="300px">
         <Box sx={{ marginTop: "10px" }}>
           <Box>
-            <Box 
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-              }}
-            >
-              {/* Replace Container with Box and apply styles */}
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-            </Box>
+          
+            <VideoForm />
+          
           </Box>
         </Box>
       </WidgetWrappe>

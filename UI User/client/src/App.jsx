@@ -5,8 +5,8 @@ import {
 } from "react-router-dom";
 import { useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 import { themeSettings } from "./theme";
 import { useTranslation } from "react-i18next"; // Import from react-i18next
 
@@ -43,6 +43,8 @@ import VideoHome from "./scenes/VideoHome/VideoHome";
 import Videoplayer from "./scenes/Videoplayer/Videoplayer";
 import Music from "./scenes/Music/Music";
 import ImagePage from "./scenes/ImagesPage/ImagePage";
+import AlbumDetails from "./scenes/ImagesPage/AlbumDetails";
+import AddAlbum from "./scenes/ImagesPage/AddAlbumPage";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -197,6 +199,14 @@ function App() {
           element: <ImagePage />,
         },
       ],
+    },
+    {
+      path: "/add-album",
+      element: <AddAlbum />,
+    },
+    {
+      path: "/albums/:albumId",
+      element: <AlbumDetails />,
     },
   ]);
 

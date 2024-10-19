@@ -3,13 +3,12 @@ import { Box, TextField, Button, Typography } from "@mui/material";
 import axios from "axios";
 
 const AddAlbum = ({ handleClose }) => {
-  // Accept handleClose as a prop
   const [albumTitle, setAlbumTitle] = useState("");
   const [albumDescription, setAlbumDescription] = useState("");
   const [images, setImages] = useState([]);
 
   const handleImageChange = (e) => {
-    setImages(e.target.files); // Store the selected image files
+    setImages(e.target.files);
   };
 
   const handleSubmit = async (e) => {
@@ -18,13 +17,11 @@ const AddAlbum = ({ handleClose }) => {
     formData.append("title", albumTitle);
     formData.append("description", albumDescription);
 
-    // Append each image to the FormData
     Array.from(images).forEach((image) => {
       formData.append("images", image);
     });
 
     try {
-      // Send the album data and images to the server
       const response = await axios.post(
         "http://localhost:3001/albums",
         formData,

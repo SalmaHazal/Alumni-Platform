@@ -23,6 +23,7 @@ import serviceRoutes from "./routes/service.js";
 import feedbackRoutes from "./routes/feedback.js";
 import wrongfeedbackRoutes from "./routes/wrongfeedback.js";
 import { register } from "./controllers/auth.js";
+import { createAlbum, getAlbums, getAlbumById } from "./controllers/albumController.js";
 import contactusRoutes from "./routes/contactus.js";
 import { createPost } from "./controllers/posts.js";
 import { updateUserProfile } from "./controllers/users.js";
@@ -174,6 +175,10 @@ app.post("/api/upload", uploadSong.fields([
 ]), uploading);
 
 app.get("/api/getSong", getSongs);
+
+app.post('/albums', upload.array('images', 10), createAlbum);
+app.get('/albums', getAlbums);
+app.get('/albums/:albumId', getAlbumById);
 
 //
 app.post('/changepassword/pass', async (req, res) => {

@@ -196,7 +196,7 @@ const MyPostWidget = ({ picturePath }) => {
             sx={{ marginBottom: "1rem" }}
           />
 
-          <p className="text-md font-semibold mb-2 text-gray-700">
+          <p className={`text-md font-semibold mb-2 ${palette.mode === "dark" ? "text-white" : "text-gray-700"}`}>
             Choose a Category:
           </p>
           {/* Category selection buttons */}
@@ -395,7 +395,7 @@ const MyPostWidget = ({ picturePath }) => {
             sx={{ marginBottom: "1rem" }}
           />
 
-          <p className="text-md font-semibold mb-2 text-gray-700">
+          <p className={`text-md font-semibold mb-2 ${palette.mode === "dark" ? "text-white" : "text-gray-700"}`}>
             Choose a Category:
           </p>
 
@@ -575,7 +575,7 @@ const MyPostWidget = ({ picturePath }) => {
             style={{ height: "300px", marginBottom: "4rem" }}
           />
 
-          <p className="text-md font-semibold mb-2 text-gray-700">
+          <p className={`text-md font-semibold mb-2 ${palette.mode === "dark" ? "text-white" : "text-gray-700"}`}>
             Choose a Category:
           </p>
 

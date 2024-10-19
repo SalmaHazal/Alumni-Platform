@@ -30,6 +30,8 @@ const Revu = () => {
     navigate(path); // Navigate to the selected path
   };
 
+  const { palette } = useTheme();
+
   return (
     <>
       <Box className="fixed-navbar">
@@ -68,7 +70,7 @@ const Revu = () => {
                   },
                 }}
               >
-                <ListItemIcon sx={{ color: "black" }}>
+                <ListItemIcon sx={{ color: palette.mode ==="dark" ? "white" : "black" }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />

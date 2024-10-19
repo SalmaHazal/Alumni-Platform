@@ -34,6 +34,7 @@ import { app, server } from "./socket/index.js";
 import bcrypt from 'bcrypt';
 import { getSongs, uploading } from "./controllers/songs.js";
 import videoRoutes from "./routes/videos.js"
+import { addView } from "./controllers/video.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -212,6 +213,7 @@ app.post('/changepassword/pass', async (req, res) => {
 app.post("/auth/register", upload.single("picture"), register); 
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.put("/users/:id", verifyToken, upload.single("picture"), updateUserProfile);
+app.put("/videos/:id/view", addView); // Increment views
 
 /* ROUTES */
 app.use("/auth", authRoutes);

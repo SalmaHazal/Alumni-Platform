@@ -15,18 +15,23 @@ const VideoSchema = new mongoose.Schema({
     required: true,
   },
   picturePath: {
-      type: String,
-      default: "",
+    type: String,
+    default: "",
   },
   videoPath: {
-      type: String,
-      default: "",
+    type: String,
+    default: "",
+  },
+  views: { 
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
+VideoSchema.index({ createdAt: -1 }); 
 
 const Video = mongoose.model("Video", VideoSchema);
-export default Video;
+export default Video;

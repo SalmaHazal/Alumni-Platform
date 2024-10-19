@@ -4,7 +4,7 @@ import { createError } from "../error.js";
 
 export const addVideo = async (req, res) => {
   try {
-    const { title, description, provider, picturePath, videoPath } = req.body;
+    const { title, description,  provider, picturePath, videoPath } = req.body;
     const user = await User.findById(provider);
 
     if (!user) {
@@ -25,6 +25,26 @@ export const addVideo = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+export const addView = async (req, res, next) => {
+  try {
+    const video = await Video.findByIdAndUpdate(req.params.id, {
+      $inc: { views: 1 },
+    }, { new: true }); 
+
+    if (!video) {
+      return res.status(404).json({ error: "Video not found." });
+    }
+
+    res.status(200).json({ message: "The view has been increased.", views: video.views });
+  } catch (err) {
+    
+    next(err);
+  }
+};
+
+
 
 export const updateVideo = async (req, res, next) => {
   try {
@@ -71,16 +91,7 @@ export const getVideo = async (req, res, next) => {
   }
 };
 
-export const addView = async (req, res, next) => {
-  try {
-    await Video.findByIdAndUpdate(req.params.id, {
-      $inc: { views: 1 },
-    });
-    res.status(200).json("The view has been increased.");
-  } catch (err) {
-    next(err);
-  }
-};
+
 
 export const random = async (req, res, next) => {
   try {
@@ -136,5 +147,5 @@ export const search = async (req, res, next) => {
     res.status(200).json(videos);
   } catch (err) {
     next(err);
-  }
+  }
 };

@@ -42,6 +42,7 @@ import Revu from "./scenes/Revu/Revu";
 import VideoHome from "./scenes/VideoHome/VideoHome";
 import Videoplayer from "./scenes/Videoplayer/Videoplayer";
 import Music from "./scenes/Music/Music";
+import ImagePage from "./scenes/ImagesPage/ImagePage";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -193,7 +194,7 @@ function App() {
         },
         {
           path: "gallery",
-          element: <Music />,
+          element: <ImagePage />,
         },
       ],
     },

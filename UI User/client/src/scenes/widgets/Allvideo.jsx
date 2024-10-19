@@ -23,8 +23,14 @@ const Allvideo = () => {
   }, []);
 
   // Handle watch video click
-  const handleWatchVideo = (video) => {
-    navigate("/Revu/Videoplayer", { state: { video } });
+  const handleWatchVideo = async (video) => {
+    try {
+      await axios.put(`http://localhost:3001/videos/${video._id}/view`);
+      // Navigate to the Videoplayer
+      navigate("/Revu/Videoplayer", { state: { video } });
+    } catch (error) {
+      console.error("Error incrementing view count", error);
+    }
   };
 
   return (
@@ -53,7 +59,7 @@ const Allvideo = () => {
                 </CardContent>
 
                 <Button
-                  variant="contained" // You can use 'outlined' or 'text' if you want a different style
+                  variant="contained"
                   color="primary"
                   onClick={() => handleWatchVideo(video)} // Pass video to Videoplayer
                   style={{ width: "100%" }} // Ensures it takes full width like before
@@ -84,7 +90,9 @@ const Allvideo = () => {
                     {video.provider.firstName} {video.provider.lastName}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {new Date(video.createdAt).toLocaleDateString()}{", "}
+                    {video.views} views •
+                    {new Date(video.createdAt).toLocaleDateString()}
+                    {", "}
                     {new Date(video.createdAt).toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",

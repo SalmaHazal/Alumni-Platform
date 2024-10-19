@@ -10,9 +10,7 @@ import {
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import LiveTvIcon from "@mui/icons-material/LiveTv";
+import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import LamaTube from "../../../public/assets/logo.png";
 import Navbar from "../navbar/Navbar";
 import WidgetWrapper from "../../components/WidgetWrapper";
@@ -22,7 +20,6 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 const Revu = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const location = useLocation();
   const [selectedIndex, setSelectedIndex] = useState(0); // State for tracking selected index
 
   const handleListItemClick = (index, path) => {
@@ -55,22 +52,29 @@ const Revu = () => {
             {[
               { icon: <HomeIcon />, text: "Home", path: "/Revu/VideoHome" },
               { icon: <MusicNoteIcon />, text: "Music", path: "/Revu/Music" },
-              { icon: <SportsBasketballIcon />, text: "Sports", path: "/Revu/Sports" },
-              { icon: <SportsEsportsIcon />, text: "Gaming", path: "/Revu/Gaming" },
-              { icon: <LiveTvIcon />, text: "Live", path: "/Revu/Live" },
+              {
+                icon: <PhotoLibraryIcon />,
+                text: "Gallery",
+                path: "/Revu/gallery",
+              },
             ].map((item, index) => (
               <ListItem
                 button
                 key={item.text}
                 onClick={() => handleListItemClick(index, item.path)}
                 sx={{
-                  backgroundColor: selectedIndex === index ? theme.palette.action.selected : 'transparent', // Change background color if selected
-                  '&:hover': {
+                  backgroundColor:
+                    selectedIndex === index
+                      ? theme.palette.action.selected
+                      : "transparent", // Change background color if selected
+                  "&:hover": {
                     backgroundColor: theme.palette.action.hover, // Hover effect
                   },
                 }}
               >
-                <ListItemIcon sx={{ color: palette.mode ==="dark" ? "white" : "black" }}>
+                <ListItemIcon
+                  sx={{ color: palette.mode === "dark" ? "white" : "black" }}
+                >
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />

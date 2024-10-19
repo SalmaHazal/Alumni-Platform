@@ -53,6 +53,7 @@ const Videoplayer = () => {
                   {video.provider.firstName} {video.provider.lastName}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
+                  {video.views} views •
                   {new Date(video.createdAt).toLocaleDateString()}
                   {", "}
                   {new Date(video.createdAt).toLocaleTimeString([], {

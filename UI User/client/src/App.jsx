@@ -191,6 +191,10 @@ function App() {
           path: "Music",
           element: <Music />,
         },
+        {
+          path: "gallery",
+          element: <Music />,
+        },
       ],
     },
   ]);

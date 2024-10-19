@@ -33,6 +33,7 @@ import { users, posts } from "./data/index.js";
 import { app, server } from "./socket/index.js";
 import bcrypt from 'bcrypt';
 import { getSongs, uploading } from "./controllers/songs.js";
+import videoRoutes from "./routes/videos.js"
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -61,6 +62,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use("/documents", express.static(path.join(__dirname, "public/documents")));
 app.use("/covers", express.static(path.join(__dirname, "public/covers")));
 app.use("/songs", express.static(path.join(__dirname, "public/songs")));
+app.use("/video", express.static(path.join(__dirname, "public/video")));
 
 app.post("/forgot-password", (req, res) => {
   const { email } = req.body;
@@ -225,6 +227,10 @@ app.use("/api", updateLinks);
 app.use("/notifications", notificationRoutes);
 app.use("/api", jobPostRoutes);
 app.use("/services", serviceRoutes);
+app.use("/videos", upload.fields([
+  { name: 'picture', maxCount: 1 }, 
+  { name: 'video', maxCount: 1 }  
+]), videoRoutes);
 
 
 

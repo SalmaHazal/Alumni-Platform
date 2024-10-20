@@ -9,8 +9,6 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
 
-
-
 const app = express();
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -44,23 +42,45 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 /*ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register); 
+app.post("/auth/register", upload.single("picture"), register);
 
 /* ROUTES */
 app.use("/auth", authRoutes);
 
+// GET /users - Fetch all users from MongoDB without Mongoose model
+app.get("/users", async (req, res) => {
+  try {
+    const usersCollection = mongoose.connection.collection('users'); // Accessing the users collection directly
+    const users = await usersCollection.find({}).toArray(); // Fetch all documents from users collection
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching users", error });
+  }
+});
+
+// DELETE /users/:id - Delete user by ID without Mongoose model
+app.delete("/users/:id", async (req, res) => {
+  try {
+    const usersCollection = mongoose.connection.collection('users'); // Accessing the users collection directly
+    const { id } = req.params;
+    await usersCollection.deleteOne({ _id: new mongoose.Types.ObjectId(id) }); // Deleting by ObjectId
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting user", error });
+  }
+});
 
 /* MONGOOSE SETUP */
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
-    console.log("connection successfull");
+    console.log("Connection successful");
   } catch (error) {
-    console.log("server connection is failed");
+    console.log("Server connection failed", error);
   }
 };
 
-const PORT= process.env.PORT || 3002
+const PORT = process.env.PORT || 3002;
 
 // Listening to the requests
 app.listen(PORT, () => {

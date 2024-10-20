@@ -203,16 +203,18 @@ function App() {
           path: "radio",
           element: <Radio />,
         },
+        {
+          path: "albums/:albumId",
+          element: <AlbumDetails />,
+        },
+        {
+          path: "add-album",
+          element: <AddAlbum />,
+        },
       ],
     },
-    {
-      path: "/add-album",
-      element: <AddAlbum />,
-    },
-    {
-      path: "/albums/:albumId",
-      element: <AlbumDetails />,
-    },
+    
+    
   ]);
 
   return (

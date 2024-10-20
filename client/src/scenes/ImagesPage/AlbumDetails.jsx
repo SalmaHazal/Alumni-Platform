@@ -22,7 +22,7 @@ import LiveTvIcon from "@mui/icons-material/LiveTv";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import { useTheme } from "@mui/system";
 import Divider from "../widgets/Divider";
-import WidgetWrappe from "../../components/WidgetWrapper";
+
 
 const AlbumDetails = () => {
   const { albumId } = useParams(); // Get album ID from URL
@@ -61,70 +61,71 @@ const AlbumDetails = () => {
 
   return (
     <>
-    <WidgetWrappe width="90%" marginTop="3px" marginLeft="5%" height="99.5%">
-      {/* Main Content */}
-      <Box p={3}>
-        <Typography variant="h4" mb={3}>
-          {album.title}
-        </Typography>
-        <Typography variant="body1" mb={2}>
-          {album.description}
-        </Typography>
-        <Grid container spacing={2}>
-          {album.images.map((image, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <CardMedia
-                component="img"
-                image={`http://localhost:3001/assets/${image}`}
-                alt={`Image ${index + 1}`}
-                sx={{
-                  width: "100%",
-                  height: 200,
-                  objectFit: "cover",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleImageClick(image)}
-              />
-            </Grid>
-          ))}
-        </Grid>
-
-        {/* Modal for displaying the clicked image */}
-        <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-          <Box
+    <WidgetWrapper width="90%" marginTop="3px" marginLeft="5%" height="99.5%">
+  {/* Main Content */}
+  
+    <Typography variant="h4" mb={3}>
+      {album.title}
+    </Typography>
+    <Typography variant="body1" mb={2}>
+      {album.description}
+    </Typography>
+    <Grid container spacing={2}>
+      {album.images.map((image, index) => (
+        <Grid item xs={12} sm={6} md={4} key={index}>
+          <CardMedia
+            component="img"
+            image={`http://localhost:3001/assets/${image}`}
+            alt={`Image ${index + 1}`}
             sx={{
-              position: "relative",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              p: 2,
+              width: "100%",
+              height: 200,
+              objectFit: "cover",
+              cursor: "pointer",
             }}
-          >
-            <img
-              src={`http://localhost:3001/assets/${selectedImage}`} // Display selected image
-              alt="Selected"
-              style={{
-                maxWidth: "100%",
-                maxHeight: "80vh",
-                objectFit: "contain", // Keep aspect ratio
-              }}
-            />
-            <Button
-              onClick={handleClose}
-              variant="contained"
-              color="primary"
-              sx={{
-                position: "absolute",
-                top: 10,
-                right: 10,
-              }}
-            >
-              Close
-            </Button>
-          </Box>
-        </Dialog>
+            onClick={() => handleImageClick(image)}
+          />
+        </Grid>
+      ))}
+    </Grid>
+
+    {/* Modal for displaying the clicked image */}
+    <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+      <Box
+        sx={{
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          p: 2,
+        }}
+      >
+        <img
+          src={`http://localhost:3001/assets/${selectedImage}`} // Display selected image
+          alt="Selected"
+          style={{
+            maxWidth: "100%",
+            maxHeight: "80vh",
+            objectFit: "contain", // Keep aspect ratio
+          }}
+        />
+        <Button
+          onClick={handleClose}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+        >
+          Close
+        </Button>
       </Box>
-      </WidgetWrappe>
+    </Dialog>
+ 
+</WidgetWrapper>
+
     </>
   );
 };
